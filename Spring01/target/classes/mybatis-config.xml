@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--22.01.24 Mybatis 프레임워크 설정을 위한 파일 root-context 설정확인 -->
+
+<configuration> 
+	<properties>
+		 <!-- 오라클 테이블 명 TEST_BOARD 적기 -->
+		 <property name="test_board" value="test_board"/>
+		 <!-- 게시판 컬럼명 -->
+		 <property name="boardNo" value="board_no"/>
+		 <property name="boardTitle" value="board_title"/>
+		 <property name="boardContent" value="board_content"/>
+		 <property name="boardId" value="board_Id"/>
+		 <property name="cdate" value="cdate"/>
+		 
+		 <!-- 오라클 TEST_REPLY 테이블 컬럼이름 적기 :) -->
+		 <property name="test_reply" value="test_reply"/>
+		 <!-- 댓글 컬럼명 -->
+		 <property name="replyNo" value="reply_no"/>
+		 <property name="replyBno" value="reply_bno"/>
+		 <property name="replyContent" value="reply_content"/>
+		 <property name="replyId" value="reply_id"/>
+		 <property name="replyDate" value="reply_date"/>
+		 
+	</properties>
+	
+	<!-- Underscore 명명법을 Camel 명명법으로 매핑 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- 
+	typeAliases : mapper.xml의 select 리턴 타입에 들어갈 클래스 경로를 설정
+	 -->
+	  <typeAliases>
+		<package name="test.spring.ex01.domain"/> 
+	  </typeAliases>
+	 
+	 
+	
+</configuration>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.spring.ex01.BoardMapper">
+	  <!--  추가 insert -->
+	 <insert id="insert">
+	 	 insert into ${test_board} (${boardTitle}, ${boardContent}, ${boardId})
+	 	 values (#{boardTitle}, #{boardContent}, #{boardId})
+	 <!--insert into test_baord board_title, board_content, board_id
+	 values 제목, 내용, 아이디  -->
+	 </insert>
+	 
+	 <!-- 전체 조회 select_All -->
+	 <select id="select_all" resultType="BoardVO">
+	 	select * from ${test_board}
+	 	order by ${boardNo} desc
+	 </select>
+	 
+	 <!-- 번호 조회 select_by_boarNo -->
+	 <select id="select_by_boardNo" resultType="BoardVO">
+	 	select * from ${test_board} where ${boardNo} = #{boardNo} <!--  #{bno} = ? -->
+	 </select>
+	 
+	 <!-- 수정  update -->
+	 <update id="update" >
+	 	update ${test_board} set ${boardTitle} = #{boardTitle}, ${boardContent} = #{boardContent} where ${boardNo} = #{boardNo}
+	 </update>
+	 
+	 <!-- 삭제 delete -->
+	 <delete id="delete">
+	 	delete from ${test_board} where ${boardNo} = #{boardNo} 
+	 </delete>
+ 
+	 <!-- total_count -->
+	 <select id="total_count" resultType="Integer"> 
+	 	select count(*) total_cnt from ${test_board}
+	 </select> 
+	 
+	 <!-- 페이징 처리 -->
+	 <select id ="paging" resultType="BoardVO">
+	 	select b.${boardNo}, b.${boardTitle}, b.${boardContent}, b.${boardId}, b.${cdate} from(
+	 		select rownum rn, a.* from(
+	 			select * from ${test_board} order by ${boardNo} desc
+	 		)a
+	 			)b where rn between #{start} and #{end}
+	 </select>
+	 <!-- #{start{ : getStart()
+	 	  #{end} : getEnd()	  -->
+	 	  
+	 <!-- 아이디로 검색 select_by_boardId(기존 유저아이디22.01.25 2시 확인) -->
+	 <select id="select_by_boardId" resultType="BoardVO">
+	 	select * from ${test_board}
+	 	where ${boardId} like #{boardId}
+	 </select>
+	 
+	 <!-- 내용, 제목으로 조회하기 -->
+	 <select id="select_by_title_content" resultType="BoardVO">
+	 	select * from ${test_board}
+	 	where ${boardTitle} like #{keyword} or
+	 		  ${boardContent} like #{keyword} order by ${boardNo} desc
+	 </select>
+	 
+	 <update id="update_reply_count"> <!-- 댓글이 달리거나 삭제될 시 board_test에서도 reply_count가 증감되게 -->
+	 	update ${test_board}
+	 	set ${replyCount} = ${replyCount} + #{amount}
+	 	where ${boardNo} = #{boardNo}
+	 </update>
+	 
+	 
+</mapper>
