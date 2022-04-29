@@ -1,0 +1,9 @@
+공통코드테이블 comCd_t 
+div :  divnm
+rele : 가족관계명 
+zip : 주소
+eatra : 가족수당
+annual : 연차수당 
+license  : ?
+
+rela 클릭 시 가족관계명으로 code, value 조회되게 설정하기. 

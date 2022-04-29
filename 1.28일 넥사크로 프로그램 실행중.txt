@@ -1,0 +1,25 @@
+22.01.28
+이클립스 / 넥사크로 연동하기 
+
+1. 이클립스에서 New Project 생성하기 
+- 새로운 Spring Legacy Project  ->  spring MVC Project 로 생성하기 
+(패키지 이름 edu.spring.ex01 로 생성 -> 회사의 이름명 따라가기)
+
+1-1. SVN 서버 연결하기
+Windows -> Show View -> Other -> SVN Repositories 로 활성화 하기.
+
+이후 Project 우클릭 -> Properties -> Targetted RunTimes -> 아파치톰캣 선택
+		 -> Properties -> Project Facets -> Java 1.8 / Dynamic Web Module 3.1
+미리 설정해두기. 
+
+------------------------------------------------------------------------------- 
+https://milal905.tistory.com/141?category=928596 // 이거 참조하면서 공부하기
+
+
+http://support.tobesoft.co.kr/Support/index.html
+
+API (java) files 눌러 다운로드 받기
+
+이클립스 : lib폴더에 
+jar 파일 넣고
+빌드 패스 실행 후, 서버연결 (해당 연결하는 서버만 remove or add) 설정하기

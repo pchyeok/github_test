@@ -1,0 +1,61 @@
+/*1. 사원코드, 사원명, 사원주소코드, 사원주소명 */
+select empbasics_t.empCd, empbasics_t.empNm, empbasics_t.empZipCd, comCD_t.value
+from empbasics_t, comCd_T
+where empbasics_t.empZipCd = comCD_t.code;
+/*22.01.26 데이터 조회하기 위한 설정*/
+
+select a.empcd, a.empnm, a.empzipcd, b.value
+  from empbasics_t a, comcd_t b
+ where b.div = 'zip'
+   and a.empzipcd = b.code
+ ;
+ /*테이블 중복된 값을 제외하고 불러오기. where b.div = 'zip' */
+ 
+ select a.empcd, a.empnm, a.empzipcd, b.value
+   from empbasics_t a,
+        (select code, value from comcd_t where div = 'zip') b 
+  where a.empzipcd = b.code;
+  /* select code, value from comcd_t where div = 'zip') zip만 가지고있는 가상의 테이블 b 를 생성하여 가져옴 (데이터면에서 좋음)*/
+  
+  commit;
+  
+  /*2. 사원코드, 사원명, 연봉*/
+ select a.empcd, a.empnm, c.basics + c.allowance
+ from empbasics_t a, empAnnual b, yearAnallnco_t c
+ where a.empcd = b.empcd
+ and b.year = c.year
+ ;
+ /*c.allwance 수당 포함*/
+ 
+ /*3. 사원코드, 사원명, 가족관계명, 가족명*/
+
+ 
+ select a.empcd, a.empnm, b.value, c.familyname
+ from empbasics_t a, comcd_t b, familyinfo_t c
+ where b.div = 'rela'
+ and b.code = c.relacd 
+ and a.empcd = c.empcd
+ ;
+ 
+ /*4. 사원코드, 가족관계명, 가족명(본인포함)*/
+select a.empcd as code,
+        b.value as family,
+        decode(a.relacd, '1', c.empnm, d.familyname) name
+        /*relacd가 1이면 empbasics_t의 empnm 이름, 아니면 family name */
+      from empfamily_t a, comcd_t b, empbasics_t c, familyinfo_t d
+      where b.div = 'rela' /*annial 중복이 되는 값 1이 존재하므로 rela로 선택*/
+      and a.empcd = c.empcd /*사원가족관계 = 사원관리 코드*/
+      and a.relacd = b.code /*relacd*/
+      and a.relacd = d.relacd(+) /*relacd*/
+      and a.empcd = d.empcd(+) /*(+) outer join을 사용 (교집합된 부분 + 나머지)*/
+
+ /*5. 사원코드, 가족관계명, 가족명(본인포함), 자녀수당, 노인수당*/
+ 
+
+ /*6 사원코드, 사원명, 연봉, 월급여, 월세금, 월수령액*/
+ 
+ /*7. 연봉이 700,000,000원 이상인 사원에 사원명, 주소, 남은휴가일수*/
+ 
+ /*8. 사원코드, 사원명, 주소, 연봉, 수당, 연봉+수당*/
+ 
+ /*9. 사원코드, 사원명, 년차일자, 년차사용일자, 년차남은 일자, 년차수당 */

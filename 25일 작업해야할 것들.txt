@@ -1,0 +1,8 @@
+추가적으로 작업해야 할 것들
+
+member : 컨트롤러 / jsp 작업완료 
+
+board : jsp // 등록 수정 삭제 (mvc참조) list 는 04참조 // 댓글추가하기 
+list, register, detail, update, delete
+reply : jsp // 등록 수정 삭제 (03참조)
+list, register, detail, update, delete

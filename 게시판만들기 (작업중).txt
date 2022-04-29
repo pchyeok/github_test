@@ -1,0 +1,43 @@
+게시판 만들기 ㅊ 경로
+- 게시글 작성 및 댓글 (댓글은 해당 아이디만 수정, 삭제가 가능하게)
+
+1. 환경설정 구현하기
+- 자바, 이클립스 (기본적인 환경설정, 환경변수 추가하기 완료)
+- 오라클, 디벨로퍼 (기본적인 환경설정, cmd로 작업 완료 - 아이디 추가 scott, tiger)
+- 톰캣 (9), 메이븐, 스프링  (서버 환경설정 및 install 설정 완료)
+
+// 24일 오후 3시30분 완료 (2:30분 ~ 3시간 정도 소요.. 빠르게 진행하기)
+
+2. 게시판에 필요한 테이블 (DB), 컬럼
+- board : 게시판 번호, 제목, 내용, 아이디, 등록날짜
+- 시퀀스, 트리거 (자동 번호등록, 수정시 날짜 변경)
+
+- reply : 댓글 번호,  게시판 번호(게시글 불러오기), 내용, 아이디, 등록날짜
+- 시퀀스 ,트리거 (자동 댓글번호 등록, 수정시 날짜 변경)
+
+3. 자바 이클립스 설정
+- pom.xml : JUnit, 오라클 JDBC(SQL 수행 API), mybatis 라이브러리 추가 
+- web.xml : 필터 설정 (UFT-8)
+- root-context.xml : 각 spring framework 설정, 
+오라클 jdbc.dataSource, sqlSessionFactory, sqlSession, transactionManager 설정
+-- 여기까지 기본으로 완료하기!
+
+
+- mybatis-config.xml : DB 테이블, 컬럼명 properties 설정, Underscore -> Camel 명명법으로 매핑
+- board Mapper : namespace 경로 설정 및 쿼리 작성
+- reply Mapper : namespace 경로 설정 및 쿼리 작성 
+
+- domain : boardVO, replyVO 클래스, using field, getter/setter, toString 설정
+- persistence : DAO, Imple
+(mapper에 설정한 namespace선언, mybatis(root-context)에 설정한 sqlSession 설정)
+- service : service, serviceImple
+(CRUD 작업, @Service - DB상관없이 데이터 처리 및 직접 통신 하지않게 설정)
+
+- controller : 
+@RequestMapping 설정 (각 경로 board, reply, replies, member)
+
+
+board 글 등록, 수정, 삭제, 선택(CRUD) 완료  ( 본인 것만 작업되게 설정)
+sessionScope.boardId 로 session 가져오기 
+
+reply 댓글 등록, 수정, 삭제 설정
